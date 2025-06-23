@@ -15,7 +15,7 @@ GO
 --candeas de texto
 DECLARE @nombre varchar(60), @apellido varchar(90)
 SET @nombre = 'Pamela'
-SET @apellido = 'Raupa Velásquez'
+SET @apellido = 'Raupa VelÃ¡squez'
 PRINT 'Persona: ' + UPPER(@apellido) + ', ' + @nombre
 
 -- 4. Calcular la deda de una persona a partir de su fecha de nacimieinto 
@@ -50,8 +50,8 @@ PRINT FORMAT(@igv, '$#,##0.00')
 PRINT FORMAT(@total, '$#,##0.00')
 PRINT ''
 
--- C. FORMATO con tipos numéricos
-PRINT 'C. Formato con tipos numéricos:'
+-- C. FORMATO con tipos numÃ©ricos
+PRINT 'C. Formato con tipos numÃ©ricos:'
 PRINT 'Monto: ' + FORMAT(@monto, 'C', 'en-US')
 PRINT 'IGV: ' + FORMAT(@igv, 'C', 'en-US')
 PRINT 'Total: ' + FORMAT(@total, 'C', 'en-US')
@@ -100,7 +100,7 @@ DECLARE @descripcion varchar(2500);
 DECLARE @duracion int;
 DECLARE @resultado varchar(MAX) = '';
 
--- Obtener información básica de la carrera
+-- Obtener informaciÃ³n bÃ¡sica de la carrera
 SELECT 
     @nombre_carrera = names,
     @descripcion = descriptions,
@@ -112,8 +112,8 @@ WHERE id = @id_carrera;
 SET @resultado = 'REPORTE DE CARRERA' + CHAR(13) + CHAR(10);
 SET @resultado = @resultado + '====================' + CHAR(13) + CHAR(10);
 SET @resultado = @resultado + 'Carrera: ' + @nombre_carrera + CHAR(13) + CHAR(10);
-SET @resultado = @resultado + 'Duración: ' + CAST(@duracion AS varchar(2)) + ' ciclos' + CHAR(13) + CHAR(10);
-SET @resultado = @resultado + 'Descripción: ' + @descripcion + CHAR(13) + CHAR(10);
+SET @resultado = @resultado + 'DuraciÃ³n: ' + CAST(@duracion AS varchar(2)) + ' ciclos' + CHAR(13) + CHAR(10);
+SET @resultado = @resultado + 'DescripciÃ³n: ' + @descripcion + CHAR(13) + CHAR(10);
 SET @resultado = @resultado + CHAR(13) + CHAR(10);
 SET @resultado = @resultado + 'CURSOS Y PROFESORES:' + CHAR(13) + CHAR(10);
 SET @resultado = @resultado + '====================' + CHAR(13) + CHAR(10);
@@ -148,8 +148,8 @@ FETCH NEXT FROM curso_cursor INTO @curso_nombre, @creditos, @profesor_nombre, @p
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
-    SET @resultado = @resultado + '• Curso: ' + @curso_nombre + CHAR(13) + CHAR(10);
-    SET @resultado = @resultado + '  Créditos: ' + CAST(@creditos AS varchar(2)) + CHAR(13) + CHAR(10);
+    SET @resultado = @resultado + 'â€¢ Curso: ' + @curso_nombre + CHAR(13) + CHAR(10);
+    SET @resultado = @resultado + '  CrÃ©ditos: ' + CAST(@creditos AS varchar(2)) + CHAR(13) + CHAR(10);
     SET @resultado = @resultado + '  Profesor: ' + @profesor_apellido + ', ' + @profesor_nombre + CHAR(13) + CHAR(10);
     SET @resultado = @resultado + '  Especialidad: ' + @especialidad + CHAR(13) + CHAR(10);
     SET @resultado = @resultado + CHAR(13) + CHAR(10);
@@ -165,3 +165,20 @@ PRINT @resultado;
 
 
 --averiguar sobre el plan de ejecucon en sql server . tunnig de base de datos 
+
+
+SET DATEFORMAT dmy;
+DECLARE @fecha_nac date, @edades int
+SET @fecha_nac = '11/12/1999'
+SET @edades = DATEDIFF(year, @fecha_nac, GETDATE())
+IF @edades >= 18
+BEGIN
+    PRINT 'Tu edad es: ' + CONVERT(varchar(2), @edades)
+    PRINT 'Eres mayor de edad'
+END
+ELSE
+BEGIN
+    PRINT 'Tu edad es: ' + CONVERT(varchar(2), @edades)
+    PRINT 'Eres menor de edad'
+END
+GO
